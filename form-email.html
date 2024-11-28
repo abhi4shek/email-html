@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylish Contact Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex justify-center items-center min-h-screen">
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg">
+    <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Contact Us</h1>
+    <p class="text-gray-600 text-center mb-6">We'd love to hear from you. Please fill out the form below and we'll get back to you shortly!</p>
+    <form id="contact-form" class="space-y-6">
+      <!-- Name Field -->
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Your Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Enter your name"
+        />
+      </div>
+      
+      <!-- Email Field -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Enter your email"
+        />
+      </div>
+      
+      <!-- Message Field -->
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700">Your Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          required
+          class="mt-1 block w-full px-4 py-2 rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+          placeholder="Write your message here..."
+        ></textarea>
+      </div>
+      
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all"
+        >
+          Send Message
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script>
+  // Initialize EmailJS with your User ID
+  emailjs.init('aRssNE255wNGcKb8O'); // Replace 'your-user-id' with your EmailJS User ID from the dashboard
+
+  // Add form submission logic
+  document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Replace with your EmailJS service ID and template ID
+    const serviceID = 'service_45sk1cn'; // Example: "service_xxx"
+    const templateID = 'template_9t233en'; // Example: "template_xxx"
+
+    // Send the form data using EmailJS
+    emailjs.sendForm(serviceID, templateID, this)
+      .then(() => {
+        alert('Your message has been sent successfully!');
+        // Reset the form after successful submission
+        this.reset();
+      })
+      .catch(error => {
+        console.error('Failed to send email:', error);
+        alert('An error occurred while sending your message. Please try again.');
+      });
+  });
+  </script>
+
+</body>
+</html>
